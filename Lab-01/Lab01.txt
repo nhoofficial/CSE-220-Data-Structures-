@@ -1,0 +1,205 @@
+#Task1
+def shiftLeft(source,k):
+    new_lst=[0]*len(source)
+    for i in range(len(source)):
+        new_lst[i]=source[i+k]
+        if i+k==len(source)-1:
+            new_lst[i]=source[i+k]
+            break
+    for i in range(i+k,len(source)):
+        new_lst[i]=0
+    return new_lst
+source=[10,20,30,40,50,60]
+s=shiftLeft(source,3)
+print(s)
+
+
+#task2
+def rotateLeft(source,k):
+    new_lst=[0]*len(source)
+    for i in range(len(source)):  
+        if i+k==(len(source)):
+            break
+        else:
+            new_lst[i]=source[i+k]
+    c=0        
+    for i in range((len(source))-k,len(source)):
+        new_lst[i]=source[c]
+        c+=1
+    return new_lst
+
+source=[10,20,30,40,50,60]
+a=rotateLeft(source,3)
+print(a)
+
+#task3
+def remove(source,size,idx):
+    for i in range(idx,size):
+        if idx<0 or idx>size:
+            print("Invalid index")
+            break
+        else:
+            source[i]=source[i+1]
+            if i==(size-1):
+                source[i]=0
+    return source
+               
+source=[10,20,30,40,50,0,0]
+r=remove(source,5,2)
+print(r)
+
+#task4
+def removeAll(source,size,element):
+    lst=[]
+    for i in range(size):
+        if source[i]!=element:
+            lst.append(source[i])        
+    c=len(source)-len(lst)   
+    for i in range(c):
+        lst.append(0)
+    source=lst
+    print(source)
+
+source=[10,2,30,2,50,2,2,0,0]
+removeAll(source,7,2)
+
+#task5
+a=list(map(int,input().rstrip().split(",")))
+def spilitting(a):
+    sum=0
+    sum1=0
+    for i in range(len(a)):
+        sum+=a[i]
+    c=sum/2    
+    for i in range(len(a)-1):
+        if sum1==c:
+            i=len(a)-2
+        else:
+            sum1+=float(a[i])
+    if sum1==c:
+        print('True')
+    else:
+        print('False')
+spilitting(a)
+
+#task 6
+def array_series(n):
+    lst = []
+    i=1
+    while i<=n:
+        for zero in range(0, n - i):  
+            lst.append(0)
+        for num in range(i, 0, -1):
+            lst.append(num)
+        i+=1    
+    return lst
+n = int(input("Input number: "))
+a=array_series(n)
+print(a)
+
+#task 7
+def max_bunch(lst):
+    dic={}
+    for i in lst:
+        dic[i]=0
+    for i in dic:
+        for j in lst:
+            if i==j:
+                dic[i]+=1           
+    idx=0
+    for i in dic:
+        if dic[i]>idx:
+            idx=dic[i]
+    elem=None        
+    for i in dic:
+        if dic[i]==idx:
+            elem=i
+            break
+
+    n=0
+    newlst=[]        
+    for i in lst:
+        if i==elem:
+            n+=1
+        else:
+            if i!=elem:
+                newlst.append(n)      
+                n=0
+       
+    newlst.append(n)        
+    hc=0
+    for i in range(len(newlst)):
+        if newlst[i]>hc:
+            hc=newlst[i]
+    return hc
+        
+source=[1,1,2, 2, 1, 1,1,1]
+a=max_bunch(source)
+print(a)
+
+#task8
+def repition(a):
+    dic = {}
+    for i in a:
+        dic[i] = 0
+    for i in dic:
+        for j in a:
+            if i == j:
+                dic[i] += 1
+    sup = 0
+    for i in dic:
+        if dic[i] > sup:
+            sup = dic[i]
+    c = 0
+    for i in dic:
+        if dic[i] == sup:
+            c += 1
+    if c >= 2:
+        return True
+    else:
+        return False
+a = [3,4,6,3,4,7,4,6,8,6,6]
+rep=repition(a)
+print(rep)
+
+#circular array
+#task1
+source=list(map(int,input().rstrip().split(",")))
+size=int(input())
+start=int(input())
+def palindrome(source,start,size):
+    lst=[0]*len(source)
+    c=(start+(size-1))%len(source)
+    for i in range(size):
+        lst[start]=source[c]
+        c=(c-1)%len(source)
+        start=(start+1)%len(source)
+    if lst==source:
+        return True
+    else:
+        return False
+c=palindrome(source,start,size)
+print(c)
+
+
+#circular array
+#task 2
+circulararray1=[40,50,0,0,0,10,20,30]
+circulararray2=[10,20,5,0,0,0,0,0,5,40,15,25]
+def intersection(source1,start_1,size_1,source2,start_2,size_2):
+    new_lst1=[]
+    new_lst2=[]
+    for i in range(size_1):
+        new_lst1.append(source1[start_1])
+        start_1=(start_1+1)%len(source1)
+        
+    for i in range(size_2):
+        new_lst2.append(source2[start_2])
+        start_2=(start_2+1)%len(source2)
+    common_element=[]
+    for i in new_lst1:
+        if i in new_lst2:
+            common_element.append(i)
+    return common_element
+common=intersection(circulararray1,5,5,circulararray2,8,7)    
+print(common) 
