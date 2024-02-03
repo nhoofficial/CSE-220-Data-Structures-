@@ -1,0 +1,184 @@
+#task1
+def selection_sort(a,i):
+    if i==-1:
+        return a
+    else:
+        max = a[i]
+        max_idx = i
+        for j in range(0, i):
+            if a[j] > max:
+                max = a[j]
+                max_idx = j
+        temp = a[i]
+        a[i] = max
+        a[max_idx] = temp
+        return selection_sort(a,i-1)
+arr=[12,65,48,75,46,99,44,33]
+print(selection_sort(arr,(len(arr)-1)))
+
+#task2
+def insertion_sort(a,i):
+    if i==len(a):
+        return a
+    else:
+        for j in range(i-1,-1,-1):
+            if a[j] > a[j+1]:
+                temp = a[j]
+                a[j]=a[j+1]
+                a[j+1]=temp
+        return insertion_sort(a,i+1)
+arr=[12,65,48,75,46,99,44,33]
+print(insertion_sort(arr,0))
+
+#task 3
+class Node:
+    def __init__(self,element,next):
+        self.element=element
+        self.next=next
+class List:
+    head=None
+    def insert(self,a):
+        tail=None
+        for i in a:
+            newNode=Node(i,None)
+            if self.head == None:
+                self.head=newNode
+                tail=newNode
+            else:
+                tail.next=newNode
+                tail=newNode
+        tail.next=None
+    def showList(self):
+        n=self.head
+        while n!=None:
+            print(n.element)
+            n=n.next
+    def bubble_sort(self):
+        n=self.head
+        while n!=None:
+            a=self.head
+            while a!=n:
+                if a.element > n.element:
+                    temp = a.element
+                    a.element = n.element
+                    n.element = temp
+                a=a.next
+            n=n.next
+a=List()
+a.insert([14,56,28,42,140])
+a.bubble_sort()
+a.showList()
+
+#task 4
+class Node:
+    def __init__(self,element,next):
+        self.element=element
+        self.next=next
+class List:
+    head=None
+    def insert(self,a):
+        tail=None
+        for i in a:
+            newNode=Node(i,None)
+            if self.head == None:
+                self.head=newNode
+                tail=newNode
+            else:
+                tail.next=newNode
+                tail=newNode
+        tail.next=None
+    def showList(self):
+        n=self.head
+        while n!=None:
+            print(n.element)
+            n=n.next
+
+    def selection_sort(self):
+        n=self.head
+        while n!=None:
+            a=self.head
+            max=n.element
+            max_node=n
+            while a!=n:
+                if a.element > max:
+                    max=a.element
+                    max_node=a
+                    temp = n.element
+                    n.element = max
+                    max_node.element = temp  
+                a=a.next
+            n=n.next
+
+
+a=List()
+a.insert([45,23,71,1,36,22])
+a.selection_sort()
+a.showList()
+
+
+#task5
+class Node:
+    def __init__(self,element,next,prev):
+        self.element=element
+        self.next=next
+        self.prev=prev
+class DoublyList:
+    head=None
+    def insert(self,a):
+        tail=None
+        for i in a:
+            newNode=Node(i,None,None)
+            if self.head == None:
+                self.head=newNode
+                tail=newNode
+            else:
+                tail.next=newNode
+                newNode.prev=tail
+                tail=newNode
+        tail.next=None
+    def showList(self):
+        n=self.head
+        while n!=None:
+            print(n.element)
+            n=n.next
+
+    def insertion_sort(self):
+        n=self.head.next
+        while n!=None:
+            a=n.prev
+            while a!=None:
+                if a.element > a.next.element:
+                    temp = a.next.element
+                    a.next.element = a.element
+                    a.element = temp
+                a=a.prev
+            n=n.next
+
+a=DoublyList()
+a.insert([12,45,6,2,99,28])
+a.insertion_sort()
+a.showList()
+
+#task6
+a=[14,23,26,48,75]
+def binary_search(a,val,l,r):
+    mid=(l+r)//2
+    if l>r:
+        return -1
+    elif a[mid]==val:
+        return mid
+    else:
+        if a[mid]<val:
+            return binary_search(a,val,mid+1,r)
+        else:
+            return binary_search(a,val,l,mid-1)
+print(binary_search(a,75,0,len(a)-1))
+
+#task 7
+n=int(input("Enter number: "))
+def fibonacci(n):
+    if n==1 or n==2:
+        return 1
+    else:
+        return fibonacci(n-1)+fibonacci(n-2)
+print(fibonacci(n))        
